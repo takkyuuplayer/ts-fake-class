@@ -6,7 +6,9 @@
     "coveralls": "jest --coverage",
     "test": "jest",
     "test:lint": "eslint {src,test,example}/**/*.ts",
-    "lint": "eslint --fix {src,test,example}/**/*.ts"
+    "lint": "eslint --fix {src,test,example}/**/*.ts",
+    "prepublishOnly": "npm run build",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -19,7 +21,7 @@
   },
   "homepage": "https://github.com/takkyuuplayer/ts-fake-class#readme",
   "main": "./dist/index.js",
-  "types": "./dist/index.d.js",
+  "files": ["dist"],
   "devDependencies": {
     "@types/faker": "^4.1.10",
     "@types/jest": "^25.1.3",
