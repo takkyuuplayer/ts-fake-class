@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "fake-class instantiates objects with fake data.",
   "scripts": {
-    "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
+    "coveralls": "jest --coverage",
     "test": "jest",
     "test:lint": "eslint src/**/*.ts",
     "lint": "eslint --fix src/**/*.ts"
