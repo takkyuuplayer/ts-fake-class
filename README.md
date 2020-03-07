@@ -1,35 +1,45 @@
-![](https://github.com/takkyuuplayer/ts-template/workflows/CI/badge.svg)
+# fake-class
+
+![](https://github.com/takkyuuplayer/ts-fake-class/workflows/CI/badge.svg)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-# ts-template
 
-Server-side TypeScript template repository
+fake-class instantiates objects with fake data.
 
-## How to generate
+## Requirement
 
-1. TypeScript Environment
-   ```
-   $ npm i -D typescript ts-node @types/node
-   ```
-2. Test Environment by Jest
-   ```
-   $ npm i -D jest @types/jest ts-jest
-   $ npx ts-jest config:init
-   ```
-3. ESLint
+* TypeScript version **3.3** or higher
+* You have enabled the following settings in `tsconfig.json`:
 
-   ```
-   $ npm i -D eslint
-   $ npx eslint --init
-   ? How would you like to use ESLint? To check syntax and find problems
-   ? What type of modules does your project use? JavaScript modules (import/export)
-   ? Which framework does your project use? None of these
-   ? Does your project use TypeScript? Yes
-   ? Where does your code run? Browser
-   ? What format do you want your config file to be in? JavaScript
-   The config that you've selected requires the following dependencies:
-
-   @typescript-eslint/eslint-plugin@latest @typescript-eslint/parser@latest
-   ? Would you like to install them now with npm? Yes
+   ```json
+   "emitDecoratorMetadata": true,
+   "experimentalDecorators": true,
    ```
 
-4. Prettier: [prettier/eslint\-plugin\-prettier: ESLint plugin for Prettier formatting](https://github.com/prettier/eslint-plugin-prettier#installation)
+## Install
+
+1. Install the npm package:
+
+    `npm install fake-class --save`
+
+## Usage
+
+```node
+import { fakeClass, FakableClass, FakableField } from "fake-class";
+
+@FakableClass()
+class User {
+  public id?: number;
+
+  @FakableField(() => "takkyuuplayer@example.com")
+  public email?: string;
+
+  public active: boolean = true;
+}
+
+const user = fakeClass(User);
+console.log(user); // User {active: true, email: 'takkyuuplayer@example.com' }
+```
+
+See more [examples](https://github.com/takkyuuplayer/ts-faker-decoration/tree/master/example)
+
+## 
