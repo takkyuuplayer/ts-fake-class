@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "fake-class instantiates objects with fake data.",
   "scripts": {
-    "test": "npm run test:lint && jest",
-    "test:lint": "eslint src/**/*.ts",
-    "lint": "eslint --fix src/**/*.ts"
+    "coveralls": "jest --coverage",
+    "test": "jest",
+    "test:lint": "eslint {src,test,example}/**/*.ts",
+    "lint": "eslint --fix {src,test,example}/**/*.ts"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
     "@types/node": "^13.7.7",
     "@typescript-eslint/eslint-plugin": "^2.22.0",
     "@typescript-eslint/parser": "^2.22.0",
+    "coveralls": "^3.0.9",
     "eslint": "^6.8.0",
     "eslint-plugin-prettier": "^3.1.2",
     "faker": "^4.1.0",
