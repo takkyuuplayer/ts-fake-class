@@ -18,6 +18,8 @@
     "url": "https://github.com/takkyuuplayer/ts-fake-class/issues"
   },
   "homepage": "https://github.com/takkyuuplayer/ts-fake-class#readme",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.js",
   "devDependencies": {
     "@types/faker": "^4.1.10",
     "@types/jest": "^25.1.3",
