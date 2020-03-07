@@ -41,7 +41,7 @@ export function fake<T extends new (...args: any[]) => any>(
       });
 
       if (fieldMetadata) {
-        faked[propertyName] = fieldMetadata.faker();
+        faked[propertyName] = fieldMetadata.resolver();
       }
     });
 

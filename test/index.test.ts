@@ -23,7 +23,7 @@ describe("index", () => {
     it("creates fake class", () => {
       expect(faked).toBeInstanceOf(Klass);
     });
-    it("sets properties by calling faker function", () => {
+    it("sets properties by calling resolver function", () => {
       expect(faked.email).toBe("test@example.com");
     });
     it("returns default value when the property is not fakable.", () => {

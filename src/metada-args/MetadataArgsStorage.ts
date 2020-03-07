@@ -4,7 +4,7 @@ interface IClassMetadataArgs {
 interface IFieldMetadataArgs {
   readonly target: Function | string;
   readonly propertyName: string;
-  readonly faker: Function;
+  readonly resolver: Function;
 }
 export class MetadataArgsStorage {
   readonly classes: IClassMetadataArgs[] = [];
