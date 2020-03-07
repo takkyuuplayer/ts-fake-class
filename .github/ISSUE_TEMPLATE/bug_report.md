@@ -10,7 +10,7 @@ assignees: ''
 **Describe the bug**
 A clear and concise description of what the bug is.
 
-**To Reproduce**
+**Steps to reproduce or a small repository showing the problem:**
 
 Example code to reproduce the bug.
 
