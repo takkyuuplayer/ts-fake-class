@@ -5,8 +5,8 @@
   "scripts": {
     "coveralls": "jest --coverage",
     "test": "jest",
-    "test:lint": "eslint src/**/*.ts",
-    "lint": "eslint --fix src/**/*.ts"
+    "test:lint": "eslint {src,test,example}/**/*.ts",
+    "lint": "eslint --fix {src,test,example}/**/*.ts"
   },
   "repository": {
     "type": "git",
