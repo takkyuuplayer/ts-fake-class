@@ -6,14 +6,26 @@ import { FakableField } from "../../src/decorator/FakableField";
 class Klass {
   @FakableField()
   public field: string = "";
+
+  @FakableField(() => "test@example.com")
+  public email: string = "";
 }
 
 describe("decorator/FakableClass", () => {
   describe("@FakableFields", () => {
     it("add a class into MetadataArgsStorage.classes", () => {
-      expect(getMetadataArgsStorage().fields).toStrictEqual([
-        { target: Klass, propertyName: "field" }
-      ]);
+      expect(getMetadataArgsStorage().fields).toEqual(
+        expect.arrayContaining([
+          { target: Klass, propertyName: "field", faker: undefined }
+        ])
+      );
+    });
+    it("accepts function and set to faker", () => {
+      const emailFiled = getMetadataArgsStorage().fields.find(
+        fieldMetadataArgs => fieldMetadataArgs.propertyName === "email"
+      );
+
+      expect(emailFiled!.faker!()).toBe("test@example.com");
     });
   });
 });
