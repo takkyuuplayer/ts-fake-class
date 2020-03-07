@@ -33,9 +33,15 @@ describe("index", () => {
       expect(() => fake(class {})).toThrowError(FakableClassNotFoundError);
     });
 
-    it("uses properties", () => {
+    it("sets properties from 2nd argument", () => {
       const faked = fake(Klass, { email: "new@example.com" });
       expect(faked.email).toBe("new@example.com");
+    });
+    it("returns multiple fake instances", () => {
+      const fakedClasses = fake(Klass, undefined, 3);
+
+      expect(fakedClasses.length!).toBe(3);
+      expect(fakedClasses[0]).toBeInstanceOf(Klass);
     });
   });
 });
