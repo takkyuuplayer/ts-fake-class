@@ -1,4 +1,4 @@
-import { getMetadataArgsStorage, fake } from "../src";
+import { getMetadataArgsStorage, fakeClass } from "../src";
 import { MetadataArgsStorage } from "../src/metada-args/MetadataArgsStorage";
 import { FakableClass } from "../src/decorator/FakableClass";
 import { FakableField } from "../src/decorator/FakableField";
@@ -10,16 +10,16 @@ describe("index", () => {
       expect(getMetadataArgsStorage()).toBeInstanceOf(MetadataArgsStorage);
     });
   });
-  describe("fake()", () => {
+  describe("fakeClass()", () => {
     @FakableClass()
     class Klass {
       @FakableField(() => "test@example.com")
-      public email: string = "";
+      public email?: string;
 
       public nonFakable: string = "I am not fakable";
     }
 
-    const faked = fake(Klass);
+    const faked = fakeClass(Klass);
     it("creates fake class", () => {
       expect(faked).toBeInstanceOf(Klass);
     });
@@ -30,15 +30,15 @@ describe("index", () => {
       expect(faked.nonFakable).toBe("I am not fakable");
     });
     it("throws error when passing non FakableClass", () => {
-      expect(() => fake(class {})).toThrowError(FakableClassNotFoundError);
+      expect(() => fakeClass(class {})).toThrowError(FakableClassNotFoundError);
     });
 
     it("sets properties from 2nd argument", () => {
-      const faked = fake(Klass, { email: "new@example.com" });
+      const faked = fakeClass(Klass, { email: "new@example.com" });
       expect(faked.email).toBe("new@example.com");
     });
     it("returns multiple fake instances", () => {
-      const fakedClasses = fake(Klass, undefined, 3);
+      const fakedClasses = fakeClass(Klass, undefined, 3);
 
       expect(fakedClasses.length!).toBe(3);
       expect(fakedClasses[0]).toBeInstanceOf(Klass);

@@ -1,6 +1,8 @@
 import { MetadataArgsStorage } from "./metada-args/MetadataArgsStorage";
 import { PlatformTools } from "./platform/platformTools";
 import { FakableClassNotFoundError } from "./error/FakableClassNotFoundError";
+export * from "./decorator/FakableClass";
+export * from "./decorator/FakableField";
 
 export function getMetadataArgsStorage(): MetadataArgsStorage {
   const globalScope = PlatformTools.getGlobalVariable();
@@ -11,7 +13,7 @@ export function getMetadataArgsStorage(): MetadataArgsStorage {
   return globalScope.fakeDecoratorMetadataArgsStorage;
 }
 
-export function fake<T extends new (...args: any[]) => any>(
+export function fakeClass<T extends new (...args: any[]) => any>(
   FakableClass: T,
   properties?: any,
   count = 1
@@ -23,26 +25,22 @@ export function fake<T extends new (...args: any[]) => any>(
     throw new FakableClassNotFoundError(FakableClass);
   }
 
+  const fakedFields = getMetadataArgsStorage().fields.filter(fm => {
+    return fm.target === FakableClass;
+  });
+
   let fakedClasses: Array<T> = [];
   for (let index = 0; index < count; index++) {
     const faked = new FakableClass();
 
-    Object.getOwnPropertyNames(faked).forEach(propertyName => {
-      // TODO: Is there better way?
-      // eslint-disable-next-line no-prototype-builtins
-      if (properties?.hasOwnProperty(propertyName)) {
-        faked[propertyName] = properties[propertyName];
+    fakedFields.forEach(fieldMetadataArgs => {
+      if (properties?.hasOwnProperty(fieldMetadataArgs.propertyName)) {
+        faked[fieldMetadataArgs.propertyName] =
+          properties[fieldMetadataArgs.propertyName];
         return;
       }
 
-      // TODO: Make it O(1) with hashmap
-      const fieldMetadata = getMetadataArgsStorage().fields.find(fm => {
-        return fm.target === FakableClass && fm.propertyName === propertyName;
-      });
-
-      if (fieldMetadata) {
-        faked[propertyName] = fieldMetadata.resolver();
-      }
+      faked[fieldMetadataArgs.propertyName] = fieldMetadataArgs.resolver();
     });
 
     fakedClasses.push(faked);
