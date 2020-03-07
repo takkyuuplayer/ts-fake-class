@@ -41,5 +41,3 @@ console.log(user); // User {active: true, email: 'takkyuuplayer@example.com' }
 ```
 
 See more [examples](https://github.com/takkyuuplayer/ts-faker-decoration/tree/master/example)
-
-## 
