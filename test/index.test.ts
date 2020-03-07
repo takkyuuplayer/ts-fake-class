@@ -32,5 +32,10 @@ describe("index", () => {
     it("throws error when passing non FakableClass", () => {
       expect(() => fake(class {})).toThrowError(FakableClassNotFoundError);
     });
+
+    it("uses properties", () => {
+      const faked = fake(Klass, { email: "new@example.com" });
+      expect(faked.email).toBe("new@example.com");
+    });
   });
 });

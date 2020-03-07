@@ -12,7 +12,8 @@ export function getMetadataArgsStorage(): MetadataArgsStorage {
 }
 
 export function fake<T extends new (...args: any[]) => any>(
-  FakableClass: T
+  FakableClass: T,
+  properties?: any
 ): any {
   const classMetadata = getMetadataArgsStorage().classes.find(
     classMetadataArgs => classMetadataArgs.target === FakableClass
@@ -23,6 +24,13 @@ export function fake<T extends new (...args: any[]) => any>(
 
   const faked = new FakableClass();
   Object.getOwnPropertyNames(faked).forEach(propertyName => {
+    // TODO: Is there better way?
+    // eslint-disable-next-line no-prototype-builtins
+    if (properties?.hasOwnProperty(propertyName)) {
+      faked[propertyName] = properties[propertyName];
+      return;
+    }
+
     // TODO: Make it O(1) with hashmap
     const fieldMetadata = getMetadataArgsStorage().fields.find(fm => {
       return fm.target === FakableClass && fm.propertyName === propertyName;
