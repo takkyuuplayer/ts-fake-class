@@ -13,9 +13,6 @@ describe("index", () => {
   describe("fake()", () => {
     @FakableClass()
     class Klass {
-      @FakableField()
-      public field: string = "";
-
       @FakableField(() => "test@example.com")
       public email: string = "";
 

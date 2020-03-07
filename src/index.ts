@@ -28,11 +28,9 @@ export function fake<T extends new (...args: any[]) => any>(
       return fm.target === FakableClass && fm.propertyName === propertyName;
     });
 
-    if (!fieldMetadata || !fieldMetadata.faker) {
-      return;
+    if (fieldMetadata) {
+      faked[propertyName] = fieldMetadata.faker();
     }
-
-    faked[propertyName] = fieldMetadata.faker();
   });
 
   return faked;
