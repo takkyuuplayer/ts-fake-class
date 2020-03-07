@@ -40,5 +40,11 @@
     "ts-node": "^8.6.2",
     "typeorm": "^0.2.24",
     "typescript": "^3.8.3"
-  }
+  },
+  "keywords": [
+    "fake",
+    "mock",
+    "test",
+    "testing"
+  ]
 }
