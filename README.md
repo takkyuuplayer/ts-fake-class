@@ -25,6 +25,8 @@ fake-class instantiates objects with fake data.
 
 ## Usage
 
+### Basic Usage
+
 ```node
 import { fakeClass, FakableClass, FakableField } from "fake-class";
 
@@ -42,4 +44,29 @@ const user = fakeClass(User);
 console.log(user); // User {active: true, email: 'takkyuuplayer@example.com' }
 ```
 
-See more [examples](https://github.com/takkyuuplayer/ts-faker-decoration/tree/master/example)
+### Field Relation
+
+You can set orders for fields to be resolved earlier than the others.
+The default order is `Number.MAX_VALUE`.
+
+Useful to relate faked fields.
+
+```node
+@FakableClass()
+class User {
+  @FakableField(() => 5, {
+    order: 0
+  })
+  public id?: number;
+
+  @FakableField((user: User) => `test-${user.id}@example.com`)
+  public email?: string;
+}
+
+const user = fakeClass(User);
+console.log(user); // User {id: 5, email: 'test-5@example.com' }
+```
+
+### More Examples
+
+See more [examples](https://github.com/takkyuuplayer/ts-faker-decoration/tree/master/example).

@@ -16,7 +16,8 @@ describe("decorator/FakableClass", () => {
         fieldMetadataArgs => fieldMetadataArgs.propertyName === "email"
       );
 
-      expect(emailFiled!.resolver!()).toBe("test@example.com");
+      expect(emailFiled!.resolver()).toBe("test@example.com");
+      expect(emailFiled!.order).toBe(Number.MAX_VALUE);
     });
   });
 });

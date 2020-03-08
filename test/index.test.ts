@@ -17,6 +17,19 @@ describe("index", () => {
       public email?: string;
 
       public nonFakable: string = "I am not fakable";
+
+      @FakableField(
+        (klass: Klass) => `https://example.com/user-${klass.id}.jpg`,
+        {
+          order: 1
+        }
+      )
+      public avator?: string;
+
+      @FakableField(() => 5, {
+        order: 0
+      })
+      public id?: number;
     }
 
     const faked = fakeClass(Klass);
@@ -42,6 +55,9 @@ describe("index", () => {
 
       expect(fakedClasses.length!).toBe(3);
       expect(fakedClasses[0]).toBeInstanceOf(Klass);
+    });
+    it("allows multipe fields to relate", () => {
+      expect(faked.avator).toBe(`https://example.com/user-5.jpg`);
     });
   });
 });
