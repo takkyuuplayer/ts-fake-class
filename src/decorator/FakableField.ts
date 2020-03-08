@@ -2,7 +2,7 @@ import { getMetadataArgsStorage } from "../";
 
 export function FakableField(
   resolver: (instance: any) => any,
-  { order } = { order: Math.max() }
+  { order } = { order: Number.MAX_VALUE }
 ): Function {
   return function(object: Object, propertyName: string) {
     getMetadataArgsStorage().fields.push({
