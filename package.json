@@ -21,7 +21,9 @@
   },
   "homepage": "https://github.com/takkyuuplayer/ts-fake-class#readme",
   "main": "./dist/index.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@types/faker": "^4.1.10",
     "@types/jest": "^25.1.3",
