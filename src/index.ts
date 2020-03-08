@@ -29,7 +29,7 @@ export function fakeClass<T extends new (...args: any[]) => any>(
     .fields.filter(fm => {
       return fm.target === FakableClass;
     })
-    .sort((a, b) => (a.order <= b.order ? -1 : a.order === b.order ? 0 : 1));
+    .sort((a, b) => (a.order < b.order ? -1 : a.order === b.order ? 0 : 1));
 
   let fakedClasses: Array<T> = [];
   for (let index = 0; index < count; index++) {
