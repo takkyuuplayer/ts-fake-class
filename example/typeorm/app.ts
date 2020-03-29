@@ -7,9 +7,9 @@ createConnection({
   type: "sqlite",
   database: ":memory:",
   entities: [User],
-  synchronize: true
+  synchronize: true,
 })
-  .then(async connection => {
+  .then(async (connection) => {
     const user = fakeClass(User, undefined, 3);
     const repository = connection.getRepository(User);
 
@@ -19,4 +19,4 @@ createConnection({
 
     console.log(users);
   })
-  .catch(error => console.log(error));
+  .catch((error) => console.log(error));

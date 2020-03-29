@@ -8,7 +8,7 @@ describe("decorator/FakableClass", () => {
   describe("@FakableClass", () => {
     it("add a class into MetadataArgsStorage.classes", () => {
       expect(getMetadataArgsStorage().classes).toStrictEqual([
-        { target: Klass }
+        { target: Klass },
       ]);
     });
   });

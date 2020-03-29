@@ -13,7 +13,7 @@ describe("decorator/FakableClass", () => {
   describe("@FakableFields", () => {
     it("accepts function and set to faker", () => {
       const emailFiled = getMetadataArgsStorage().fields.find(
-        fieldMetadataArgs => fieldMetadataArgs.propertyName === "email"
+        (fieldMetadataArgs) => fieldMetadataArgs.propertyName === "email"
       );
 
       expect(emailFiled!.resolver()).toBe("test@example.com");
