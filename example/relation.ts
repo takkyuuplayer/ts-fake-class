@@ -3,7 +3,7 @@ import { fakeClass, FakableClass, FakableField } from "../src/index";
 @FakableClass()
 class User {
   @FakableField(() => 5, {
-    order: 0
+    order: 0,
   })
   public id?: number;
 

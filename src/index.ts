@@ -19,14 +19,14 @@ export function fakeClass<T extends new (...args: any[]) => any>(
   count = 1
 ): any {
   const classMetadata = getMetadataArgsStorage().classes.find(
-    classMetadataArgs => classMetadataArgs.target === FakableClass
+    (classMetadataArgs) => classMetadataArgs.target === FakableClass
   );
   if (!classMetadata) {
     throw new FakableClassNotFoundError(FakableClass);
   }
 
   const fakedFields = getMetadataArgsStorage()
-    .fields.filter(fm => {
+    .fields.filter((fm) => {
       return fm.target === FakableClass;
     })
     .sort((a, b) => (a.order < b.order ? -1 : a.order === b.order ? 0 : 1));
@@ -35,7 +35,7 @@ export function fakeClass<T extends new (...args: any[]) => any>(
   for (let index = 0; index < count; index++) {
     const faked = new FakableClass();
 
-    fakedFields.forEach(fieldMetadataArgs => {
+    fakedFields.forEach((fieldMetadataArgs) => {
       if (properties?.hasOwnProperty(fieldMetadataArgs.propertyName)) {
         faked[fieldMetadataArgs.propertyName] =
           properties[fieldMetadataArgs.propertyName];

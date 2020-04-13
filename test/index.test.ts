@@ -21,13 +21,13 @@ describe("index", () => {
       @FakableField(
         (klass: Klass) => `https://example.com/user-${klass.id}.jpg`,
         {
-          order: 1
+          order: 1,
         }
       )
       public avator?: string;
 
       @FakableField(() => 5, {
-        order: 0
+        order: 0,
       })
       public id?: number;
     }
